@@ -1,0 +1,13 @@
+@{
+    var message = TempData["StatusMessage"] as string;
+}
+@if (!string.IsNullOrEmpty(message))
+{
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["StatusMessage"]
+            <button class="close" aria-label="Close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+}

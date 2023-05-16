@@ -1,0 +1,12 @@
+@model App.Models.ProductModel
+
+<div class="card bg-primary text-white">
+    <h1 class="card-header">@Model.Name</h1>
+    <div class="card-body">
+        <p class="card-text">
+            Gia: @Model.Price
+        </p>
+    </div>
+</div>
+<hr>
+@this.Path

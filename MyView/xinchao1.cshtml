@@ -1,0 +1,14 @@
+@model (string Name, int number)
+@{;
+    Layout = "_Layout";
+}
+<div class="card bg-primary text-white">
+    <h1 class="card-header">Xin chao @Model.Name + @Model.number</h1>
+    <div class="card-body">
+        <p class="card-text">
+        Ban dan tim hieu ve View
+        </p>
+    </div>
+</div>
+<hr>
+@this.Path
