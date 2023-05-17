@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using App.Models.Contacts;
 namespace App.Models
 {
     public class AppDbContext : DbContext
@@ -29,5 +29,7 @@ namespace App.Models
             //     }
             // }
         }
+
+        public DbSet<Contact> Contacts { set; get; }
     }
 }
