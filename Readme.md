@@ -19,3 +19,35 @@ options.ViewLocationFormats.Add("/MyView/{1}/{0}" + RazorViewEngine.ViewExtensio
 - ViewData
 - ViewBag
 - TempData
+
+## Areas
+- La ten dung de routing
+- La cau truc thu muc chua M.V.C
+- Thiet lap Area cho controller bang ```[Area("AreaName")]```
+- Tao cau truc thu muc
+
+...
+dotnet asp-codegenerator area Product
+
+## Route
+- endpoints.MapControllerRoute
+- endpoints.MapAreaControllerRoute
+- [AccepVerbs("POST", "GET")]
+- [Route("pattern:)]
+- [HttpGet] [HttpPost]
+
+## Url Generation
+### UrlHelper : Action, ActionLink, RouteUrl, Link
+...
+Url.Action("PlanetInfo", "Planet", new {id = 3}, Context.Request.Scheme)
+
+Url.RouteUrl("default", new {controller = "First", action = "HelloView", id = 1, username = "Cuong"})
+...
+### HtmlTagHelper: ```<a> <button> <form>```
+Su dung thuoc tinh
+...
+asp-area="Area"
+asp-action="Action"
+asp-controller="Controller"
+asp-route...="123"
+asp-route="default"

@@ -7,3 +7,50 @@
     <h1 class="display-4">Xin chào</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<p>
+    @Url.ActionLink()
+</p>
+<p>
+    @Url.Action()
+</p>
+<p>
+    @Url.Action("Privacy")
+</p>
+<p>
+    @Url.Action("Privacy", new {id = 123, name = "Cuong"})
+</p>
+<p>
+    @Url.Action("Jupiter", "Planet")
+</p>
+<p>
+    @Url.Action("PlanetInfo", "Planet", new {id = 1})
+</p>
+<p>
+    @Url.Action("Index", "Product", new {area = "ProductManage", id = 1})
+</p>
+
+<p>
+    @Url.RouteUrl("default", new {action = "HelloView", controller = "Home"})
+</p>
+<p>
+    @Url.RouteUrl("neptune1")
+</p>
+
+@* <a> <form> <button> *@
+<a asp-action="PlanetInfo" asp-controller="Planet" asp-route-id="1">
+    Vi du
+</a>
+
+@{
+    @* var routedata =  *@
+}
+<a asp-action="Index" asp-controller="Home" asp-all-route-data='new Dictionary<string, string>()
+        {
+            {"name", "Cuong"},
+            {"abc", "XYZ"},
+            {"id", "3"}
+        }'>
+    Vi du 2
+</a>

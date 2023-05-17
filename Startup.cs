@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using App.ExtendMethods;
 using App.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,6 +52,7 @@ namespace App
             // services.AddSingleton<ProductService, ProductService>();
             // services.AddSingleton(typeof(ProductService));
             services.AddSingleton(typeof(ProductService), typeof(ProductService));
+            services.AddSingleton<PlanetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +70,7 @@ namespace App
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.AddStatusCodePage(); // loi tu 400 - 500
 
             app.UseRouting();
 
@@ -73,6 +79,46 @@ namespace App
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapGet("/sayhi", async context =>
+                {
+                    await context.Response.WriteAsync("");
+                });
+                // endpoints.MapControllers
+                // endpoints.MapControllerRoute
+                // endpoints.MapDefaultControllerRoute
+                // endpoints.MapAreaControllerRoute
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "first",
+                    pattern: "{url:regex(^((xemsanpham)|(viewproduct))$)}/{id:range(2,4)}",
+                    defaults: new
+                    {
+                        controller = "First",
+                        action = "ViewProduct",
+                    },
+                    constraints: new
+                    {
+                        // url = new RegexRouteConstraint(@"^((xemsanpham)|(viewproduct))$"),
+                        // id = new RangeRouteConstraint(2, 4),
+                    }
+                );
+                endpoints.MapAreaControllerRoute(
+                    name: "product",
+                    pattern: "/{controller}/{action=Index}/{id?}",
+                    areaName: "ProductManage"
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "firstroute",
+                    pattern: "/{controller=Home}/{action=Index}/{id?}"
+                // defaults: new
+                // {
+                //     controller = "First",
+                //     action = "ViewProduct",
+                //     // id = 3
+                // }
+                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
